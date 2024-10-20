@@ -5,4 +5,3 @@
 
 ### Required installations:
 - pip install pyspark
-- pip install pandas
