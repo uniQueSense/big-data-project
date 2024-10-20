@@ -1,13 +1,33 @@
-import pandas as pd
+from pyspark.sql import SparkSession
+import os
+
+
+def get_spark_session():
+    return SparkSession.builder.appName("Spotify Data Sample").getOrCreate()
+
 
 def load_data(path):
-    return pd.read_csv(path)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Plik {path} nie istnieje.")
 
-def load_samples(path, rows):
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.max_rows', 500)
-    return pd.read_csv(path, nrows=rows)
+    spark = get_spark_session()
+    return spark.read.csv(path, header=True, inferSchema=True)
+
+
+def load_samples(path, fraction=None, rows=None):
+    df = load_data(path)
+
+    if fraction is not None:
+        sample_df = df.sample(fraction=fraction, seed=42)
+    elif rows is not None:
+        sample_df = df.limit(rows)
+    else:
+        raise ValueError("podać fraction lub rows.")
+
+    return sample_df
+
 
 def clean_data(df):
-    df_cleaned = df.dropna().drop_duplicates()
+    df_cleaned = df.na.drop()  # usuwanie wierszy z brakującymi wartościami
+    df_cleaned = df_cleaned.dropDuplicates()
     return df_cleaned
