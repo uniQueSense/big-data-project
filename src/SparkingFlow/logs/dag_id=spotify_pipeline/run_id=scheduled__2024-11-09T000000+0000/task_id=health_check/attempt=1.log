@@ -1,0 +1,177 @@
+[2024-11-10T00:00:01.585+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-10T00:00:01.602+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spotify_pipeline.health_check scheduled__2024-11-09T00:00:00+00:00 [queued]>
+[2024-11-10T00:00:01.612+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spotify_pipeline.health_check scheduled__2024-11-09T00:00:00+00:00 [queued]>
+[2024-11-10T00:00:01.612+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2024-11-10T00:00:01.627+0000] {taskinstance.py:2888} INFO - Executing <Task(SparkSubmitOperator): health_check> on 2024-11-09 00:00:00+00:00
+[2024-11-10T00:00:01.631+0000] {standard_task_runner.py:72} INFO - Started process 9175 to run task
+[2024-11-10T00:00:01.636+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'spotify_pipeline', 'health_check', 'scheduled__2024-11-09T00:00:00+00:00', '--job-id', '52', '--raw', '--subdir', 'DAGS_FOLDER/spotify_pipeline.py', '--cfg-path', '/tmp/tmpqrwq5b2u']
+[2024-11-10T00:00:01.642+0000] {standard_task_runner.py:105} INFO - Job 52: Subtask health_check
+[2024-11-10T00:00:01.695+0000] {task_command.py:467} INFO - Running <TaskInstance: spotify_pipeline.health_check scheduled__2024-11-09T00:00:00+00:00 [running]> on host d2265ead819e
+[2024-11-10T00:00:01.783+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='JK' AIRFLOW_CTX_DAG_ID='spotify_pipeline' AIRFLOW_CTX_TASK_ID='health_check' AIRFLOW_CTX_EXECUTION_DATE='2024-11-09T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-11-09T00:00:00+00:00'
+[2024-11-10T00:00:01.784+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-10T00:00:01.804+0000] {base.py:84} INFO - Retrieving connection 'spark-conn'
+[2024-11-10T00:00:01.806+0000] {spark_submit.py:473} INFO - Spark-Submit cmd: spark-submit --master spark://172.23.0.2:7077 --name arrow-spark --deploy-mode client jobs/python/health_check.py
+[2024-11-10T00:00:06.140+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SparkContext: Running Spark version 3.4.2
+[2024-11-10T00:00:06.239+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2024-11-10T00:00:06.380+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO ResourceUtils: ==============================================================
+[2024-11-10T00:00:06.382+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO ResourceUtils: No custom resources configured for spark.driver.
+[2024-11-10T00:00:06.384+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO ResourceUtils: ==============================================================
+[2024-11-10T00:00:06.385+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SparkContext: Submitted application: HealthCheck
+[2024-11-10T00:00:06.423+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[2024-11-10T00:00:06.435+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO ResourceProfile: Limiting resource is cpu
+[2024-11-10T00:00:06.438+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[2024-11-10T00:00:06.513+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SecurityManager: Changing view acls to: root
+[2024-11-10T00:00:06.514+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SecurityManager: Changing modify acls to: root
+[2024-11-10T00:00:06.516+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SecurityManager: Changing view acls groups to:
+[2024-11-10T00:00:06.517+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SecurityManager: Changing modify acls groups to:
+[2024-11-10T00:00:06.519+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root; groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY
+[2024-11-10T00:00:06.972+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:06 INFO Utils: Successfully started service 'sparkDriver' on port 35065.
+[2024-11-10T00:00:07.020+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO SparkEnv: Registering MapOutputTracker
+[2024-11-10T00:00:07.078+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO SparkEnv: Registering BlockManagerMaster
+[2024-11-10T00:00:07.113+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[2024-11-10T00:00:07.114+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[2024-11-10T00:00:07.121+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[2024-11-10T00:00:07.156+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-fda51e31-5eda-4d47-a681-d343e5219f19
+[2024-11-10T00:00:07.188+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+[2024-11-10T00:00:07.215+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO SparkEnv: Registering OutputCommitCoordinator
+[2024-11-10T00:00:07.455+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+[2024-11-10T00:00:07.548+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+[2024-11-10T00:00:07.552+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 WARN Utils: Service 'SparkUI' could not bind on port 4041. Attempting port 4042.
+[2024-11-10T00:00:07.572+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO Utils: Successfully started service 'SparkUI' on port 4042.
+[2024-11-10T00:00:07.837+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://172.23.0.2:7077...
+[2024-11-10T00:00:07.902+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:07 INFO TransportClientFactory: Successfully created connection to /172.23.0.2:7077 after 40 ms (0 ms spent in bootstraps)
+[2024-11-10T00:00:08.076+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20241110000008-0006
+[2024-11-10T00:00:08.087+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 42045.
+[2024-11-10T00:00:08.088+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO NettyBlockTransferService: Server created on d2265ead819e:42045
+[2024-11-10T00:00:08.090+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[2024-11-10T00:00:08.105+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, d2265ead819e, 42045, None)
+[2024-11-10T00:00:08.108+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO BlockManagerMasterEndpoint: Registering block manager d2265ead819e:42045 with 434.4 MiB RAM, BlockManagerId(driver, d2265ead819e, 42045, None)
+[2024-11-10T00:00:08.112+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, d2265ead819e, 42045, None)
+[2024-11-10T00:00:08.116+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, d2265ead819e, 42045, None)
+[2024-11-10T00:00:08.516+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:08 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+[2024-11-10T00:00:09.269+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO SparkContext: Starting job: collect at /opt/***/jobs/python/health_check.py:11
+[2024-11-10T00:00:09.301+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Registering RDD 2 (reduceByKey at /opt/***/jobs/python/health_check.py:9) as input to shuffle 0
+[2024-11-10T00:00:09.306+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Got job 0 (collect at /opt/***/jobs/python/health_check.py:11) with 2 output partitions
+[2024-11-10T00:00:09.307+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Final stage: ResultStage 1 (collect at /opt/***/jobs/python/health_check.py:11)
+[2024-11-10T00:00:09.308+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 0)
+[2024-11-10T00:00:09.309+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 0)
+[2024-11-10T00:00:09.313+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Submitting ShuffleMapStage 0 (PairwiseRDD[2] at reduceByKey at /opt/***/jobs/python/health_check.py:9), which has no missing parents
+[2024-11-10T00:00:09.392+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 11.1 KiB, free 434.4 MiB)
+[2024-11-10T00:00:09.427+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 7.0 KiB, free 434.4 MiB)
+[2024-11-10T00:00:09.432+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on d2265ead819e:42045 (size: 7.0 KiB, free: 434.4 MiB)
+[2024-11-10T00:00:09.435+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1535
+[2024-11-10T00:00:09.455+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 0 (PairwiseRDD[2] at reduceByKey at /opt/***/jobs/python/health_check.py:9) (first 15 tasks are for partitions Vector(0, 1))
+[2024-11-10T00:00:09.457+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:09 INFO TaskSchedulerImpl: Adding task set 0.0 with 2 tasks resource profile 0
+[2024-11-10T00:00:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:00:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:00:54.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:00:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:01:09.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:01:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:01:24.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:01:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:01:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:01:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:01:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:01:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:02:09.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:02:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:02:24.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:02:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:02:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:02:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:02:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:02:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:03:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:03:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:03:24.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:03:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:03:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:03:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:03:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:03:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:04:09.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:04:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:04:24.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:04:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:04:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:04:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:04:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:04:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:05:09.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:05:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:05:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:05:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:05:39.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:05:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:05:54.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:05:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:06:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:06:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:06:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:06:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:06:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:06:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:06:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:06:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:07:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:07:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:07:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:07:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:07:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:07:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:07:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:07:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:08:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:08:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:08:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:08:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:08:39.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:08:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:08:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:08:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:09:09.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:09:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:09:24.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:09:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:09:39.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:09:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:09:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:09:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:10:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:10:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:10:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:10:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:10:39.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:10:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:10:54.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:10:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:11:09.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:11:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:11:24.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:11:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:11:39.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:11:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:11:54.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:11:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:12:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:12:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:12:24.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:12:24 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:12:39.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:12:39 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:12:54.478+0000] {spark_submit.py:634} INFO - 24/11/10 00:12:54 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:13:09.477+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:09 WARN TaskSchedulerImpl: Initial job has not accepted any resources; check your cluster UI to ensure that workers are registered and have sufficient resources
+[2024-11-10T00:13:17.064+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:17 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20241110000008-0006/0 on worker-20241109175335-172.23.0.5-35065 (172.23.0.5:35065) with 2 core(s)
+[2024-11-10T00:13:17.066+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:17 INFO StandaloneSchedulerBackend: Granted executor ID app-20241110000008-0006/0 on hostPort 172.23.0.5:35065 with 2 core(s), 1024.0 MiB RAM
+[2024-11-10T00:13:17.109+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:17 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20241110000008-0006/0 is now RUNNING
+[2024-11-10T00:13:19.560+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:19 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.23.0.5:51174) with ID 0,  ResourceProfileId 0
+[2024-11-10T00:13:19.620+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:19 INFO BlockManagerMasterEndpoint: Registering block manager 172.23.0.5:33831 with 434.4 MiB RAM, BlockManagerId(0, 172.23.0.5, 33831, None)
+[2024-11-10T00:13:19.673+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:19 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (172.23.0.5, executor 0, partition 0, PROCESS_LOCAL, 7403 bytes)
+[2024-11-10T00:13:19.677+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:19 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (172.23.0.5, executor 0, partition 1, PROCESS_LOCAL, 7436 bytes)
+[2024-11-10T00:13:19.947+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:19 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 172.23.0.5:33831 (size: 7.0 KiB, free: 434.4 MiB)
+[2024-11-10T00:13:21.155+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 1478 ms on 172.23.0.5 (executor 0) (1/2)
+[2024-11-10T00:13:21.157+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1494 ms on 172.23.0.5 (executor 0) (2/2)
+[2024-11-10T00:13:21.158+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+[2024-11-10T00:13:21.161+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 49977
+[2024-11-10T00:13:21.168+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: ShuffleMapStage 0 (reduceByKey at /opt/***/jobs/python/health_check.py:9) finished in 791.839 s
+[2024-11-10T00:13:21.169+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: looking for newly runnable stages
+[2024-11-10T00:13:21.170+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: running: Set()
+[2024-11-10T00:13:21.171+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: waiting: Set(ResultStage 1)
+[2024-11-10T00:13:21.172+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: failed: Set()
+[2024-11-10T00:13:21.175+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: Submitting ResultStage 1 (PythonRDD[5] at collect at /opt/***/jobs/python/health_check.py:11), which has no missing parents
+[2024-11-10T00:13:21.185+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 10.0 KiB, free 434.4 MiB)
+[2024-11-10T00:13:21.188+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 6.0 KiB, free 434.4 MiB)
+[2024-11-10T00:13:21.189+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on d2265ead819e:42045 (size: 6.0 KiB, free: 434.4 MiB)
+[2024-11-10T00:13:21.190+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1535
+[2024-11-10T00:13:21.192+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 1 (PythonRDD[5] at collect at /opt/***/jobs/python/health_check.py:11) (first 15 tasks are for partitions Vector(0, 1))
+[2024-11-10T00:13:21.193+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSchedulerImpl: Adding task set 1.0 with 2 tasks resource profile 0
+[2024-11-10T00:13:21.199+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 2) (172.23.0.5, executor 0, partition 0, NODE_LOCAL, 7185 bytes)
+[2024-11-10T00:13:21.201+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSetManager: Starting task 1.0 in stage 1.0 (TID 3) (172.23.0.5, executor 0, partition 1, NODE_LOCAL, 7185 bytes)
+[2024-11-10T00:13:21.228+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 172.23.0.5:33831 (size: 6.0 KiB, free: 434.4 MiB)
+[2024-11-10T00:13:21.307+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 172.23.0.5:51174
+[2024-11-10T00:13:21.595+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 2) in 399 ms on 172.23.0.5 (executor 0) (1/2)
+[2024-11-10T00:13:21.597+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSetManager: Finished task 1.0 in stage 1.0 (TID 3) in 397 ms on 172.23.0.5 (executor 0) (2/2)
+[2024-11-10T00:13:21.598+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool
+[2024-11-10T00:13:21.600+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: ResultStage 1 (collect at /opt/***/jobs/python/health_check.py:11) finished in 0.416 s
+[2024-11-10T00:13:21.603+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+[2024-11-10T00:13:21.604+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO TaskSchedulerImpl: Killing all running tasks in stage 1: Stage finished
+[2024-11-10T00:13:21.606+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO DAGScheduler: Job 0 finished: collect at /opt/***/jobs/python/health_check.py:11, took 792.340956 s
+[2024-11-10T00:13:21.622+0000] {spark_submit.py:634} INFO - Python 1
+[2024-11-10T00:13:21.623+0000] {spark_submit.py:634} INFO - Airflow 1
+[2024-11-10T00:13:21.624+0000] {spark_submit.py:634} INFO - Docker 1
+[2024-11-10T00:13:21.625+0000] {spark_submit.py:634} INFO - and 1
+[2024-11-10T00:13:21.627+0000] {spark_submit.py:634} INFO - Yusuf 1
+[2024-11-10T00:13:21.628+0000] {spark_submit.py:634} INFO - Hello 5
+[2024-11-10T00:13:21.629+0000] {spark_submit.py:634} INFO - Spark 1
+[2024-11-10T00:13:21.630+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO SparkContext: SparkContext is stopping with exitCode 0.
+[2024-11-10T00:13:21.632+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO SparkUI: Stopped Spark web UI at http://d2265ead819e:4042
+[2024-11-10T00:13:21.636+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO StandaloneSchedulerBackend: Shutting down all executors
+[2024-11-10T00:13:21.638+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Asking each executor to shut down
+[2024-11-10T00:13:21.654+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+[2024-11-10T00:13:21.670+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO MemoryStore: MemoryStore cleared
+[2024-11-10T00:13:21.671+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO BlockManager: BlockManager stopped
+[2024-11-10T00:13:21.675+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO BlockManagerMaster: BlockManagerMaster stopped
+[2024-11-10T00:13:21.677+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+[2024-11-10T00:13:21.687+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:21 INFO SparkContext: Successfully stopped SparkContext
+[2024-11-10T00:13:22.647+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:22 INFO ShutdownHookManager: Shutdown hook called
+[2024-11-10T00:13:22.648+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:22 INFO ShutdownHookManager: Deleting directory /tmp/spark-10e83482-bf6c-44f7-b276-940d10518933
+[2024-11-10T00:13:22.650+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:22 INFO ShutdownHookManager: Deleting directory /tmp/spark-1f556fdd-895c-44c8-8a6f-a22b9e36b2d4
+[2024-11-10T00:13:22.653+0000] {spark_submit.py:634} INFO - 24/11/10 00:13:22 INFO ShutdownHookManager: Deleting directory /tmp/spark-10e83482-bf6c-44f7-b276-940d10518933/pyspark-24ddddde-2d28-4068-b0ea-5e60b1a5222d
+[2024-11-10T00:13:22.691+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-10T00:13:22.692+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=spotify_pipeline, task_id=health_check, run_id=scheduled__2024-11-09T00:00:00+00:00, execution_date=20241109T000000, start_date=20241110T000001, end_date=20241110T001322
+[2024-11-10T00:13:22.744+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-11-10T00:13:22.763+0000] {taskinstance.py:3900} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-10T00:13:22.766+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

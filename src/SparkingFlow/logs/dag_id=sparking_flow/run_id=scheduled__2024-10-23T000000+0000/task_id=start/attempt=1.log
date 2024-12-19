@@ -1,0 +1,18 @@
+[2024-10-24T17:46:47.778+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-10-24T17:46:47.839+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sparking_flow.start scheduled__2024-10-23T00:00:00+00:00 [queued]>
+[2024-10-24T17:46:47.870+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sparking_flow.start scheduled__2024-10-23T00:00:00+00:00 [queued]>
+[2024-10-24T17:46:47.993+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2024-10-24T17:46:48.111+0000] {taskinstance.py:2888} INFO - Executing <Task(PythonOperator): start> on 2024-10-23 00:00:00+00:00
+[2024-10-24T17:46:48.128+0000] {standard_task_runner.py:72} INFO - Started process 14485 to run task
+[2024-10-24T17:46:48.132+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'sparking_flow', 'start', 'scheduled__2024-10-23T00:00:00+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/spark_***.py', '--cfg-path', '/tmp/tmp0muvfvm8']
+[2024-10-24T17:46:48.145+0000] {standard_task_runner.py:105} INFO - Job 22: Subtask start
+[2024-10-24T17:46:48.276+0000] {task_command.py:467} INFO - Running <TaskInstance: sparking_flow.start scheduled__2024-10-23T00:00:00+00:00 [running]> on host 4e8fe2d0691f
+[2024-10-24T17:46:48.627+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Yusuf Ganiyu' AIRFLOW_CTX_DAG_ID='sparking_flow' AIRFLOW_CTX_TASK_ID='start' AIRFLOW_CTX_EXECUTION_DATE='2024-10-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-23T00:00:00+00:00'
+[2024-10-24T17:46:48.635+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-10-24T17:46:48.691+0000] {logging_mixin.py:190} INFO - Jobs started
+[2024-10-24T17:46:48.701+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-10-24T17:46:48.725+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-10-24T17:46:48.731+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=sparking_flow, task_id=start, run_id=scheduled__2024-10-23T00:00:00+00:00, execution_date=20241023T000000, start_date=20241024T174647, end_date=20241024T174648
+[2024-10-24T17:46:48.823+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-10-24T17:46:48.908+0000] {taskinstance.py:3900} INFO - 3 downstream tasks scheduled from follow-on schedule check
+[2024-10-24T17:46:48.914+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
