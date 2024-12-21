@@ -1,7 +1,7 @@
 import sys
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import lit, when, explode, col, split, trim
+from pyspark.sql.functions import lit, when, explode, col, split, trim, monotonically_increasing_id
 
 csv_header = ["id", "title", "rank", "date", "artist", "url", "region", "chart", "trend", "streams", "track_id",
               "album",
@@ -33,7 +33,7 @@ def process_data(input_folder, additional_folders, output_file, partition_num):
     artists_df = artists_df.drop("artist_array").distinct()
 
     # Add an ID column
-    artists_df = artists_df.withColumn("id", lit(None).cast("int"))
+    artists_df = artists_df.withColumn("id", monotonically_increasing_id())
 
     artist_json_df = spark.read.json(additional_folders["artists"])
 
@@ -51,7 +51,7 @@ def process_data(input_folder, additional_folders, output_file, partition_num):
     enriched_artists_df = enriched_artists_df.drop("name", "alias").dropDuplicates()
 
     albums_df = df.select("album").distinct()
-    albums_df = albums_df.withColumn("id", lit(None).cast("int"))
+    albums_df = albums_df.withColumn("id", monotonically_increasing_id())
 
     songs_df = df.select("id", "title", "release_date", "popularity", "duration_ms", "explicit", "album", "rank", "chart")
     songs_df = songs_df.withColumn("id", songs_df["id"].cast("string"))
@@ -62,13 +62,13 @@ def process_data(input_folder, additional_folders, output_file, partition_num):
     song_data_df = song_data_df.withColumn("song_id", song_data_df["id"])
 
     continents_df = spark.read.option("header", "true").csv(additional_folders["continents"])
-    continents_df = continents_df.selectExpr("name as country_name", "`alpha-3` as iso_code", "region as continent")
+    continents_df = continents_df.selectExpr("name as country_name", "`alpha-3` as iso_code", "`alpha-2` as iso_code_short", "region as continent")
 
     hdi_df = spark.read.option("header", "true").csv(additional_folders["hdi"])
     hdi_df = hdi_df.selectExpr("ISO3 as iso_code","`Human Development Index (2021)` as hdi", "`Human Development Groups` as hdi_group")
 
     combined_df = continents_df.join(hdi_df, on="iso_code", how="inner")
-    combined_df = combined_df.select("iso_code", "country_name", "continent", "hdi", "hdi_group")
+    combined_df = combined_df.select("iso_code", "iso_code_short", "country_name", "continent", "hdi", "hdi_group")
 
     song_rank_history_df = song_rank_history_df.join(
         combined_df.select("country_name", "iso_code"),

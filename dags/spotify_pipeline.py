@@ -6,7 +6,7 @@ from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOpe
 dag = DAG(
     dag_id = "spotify_pipeline",
     default_args = {
-        "owner": "WŚ, JK",
+        "owner": "JK",
         "start_date": airflow.utils.dates.days_ago(1)
     },
     schedule_interval = "@daily"
@@ -33,7 +33,7 @@ repartition = SparkSubmitOperator(
         "/opt/data/sampled_output.csv", 
         "/opt/data/bronze/kaggle_spotify",
         "10", 
-        "/opt/data/artists.txt", 
+        "/opt/data/artists_sample.txt", 
         "/opt/data/bronze/artists",
         "10", 
         "/opt/data/continents2.csv", 
@@ -54,8 +54,21 @@ silver_processing = SparkSubmitOperator(
         "/opt/data/bronze/kaggle_spotify", 
         "/opt/data/bronze/continents", 
         "/opt/data/bronze/hdi", 
+        "/opt/data/bronze/artists", 
         "10", 
         "/opt/data/silver"],
+    dag=dag
+)
+
+gold_processing = SparkSubmitOperator(
+    task_id="gold_processing",
+    conn_id="spark-conn",
+    application="jobs/python/gold_processing.py",
+    application_args=[
+        "/opt/data/silver",
+        "/opt/data/gold",
+        "popular_artists_by_country"
+    ],
     dag=dag
 )
 
@@ -65,4 +78,4 @@ end = PythonOperator(
     dag=dag
 )
 
-start >> [health_check, repartition] >> end
+start >> health_check >> repartition >> silver_processing >> gold_processing >> end
