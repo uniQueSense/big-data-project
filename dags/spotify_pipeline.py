@@ -58,6 +58,17 @@ silver_processing = SparkSubmitOperator(
         "/opt/data/silver"],
     dag=dag
 )
+gold_processing = SparkSubmitOperator(
+    task_id="gold_processing",
+    conn_id="spark-conn",
+    application="jobs/python/gold_processing.py",
+    application_args=[
+        "/opt/data/silver",
+        "/opt/data/gold",
+        "10"],
+    dag=dag,
+)
+
 
 end = PythonOperator(
     task_id="end",
