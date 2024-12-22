@@ -93,6 +93,28 @@ avg_days_to_popularity = SparkSubmitOperator(
     dag=dag
 )
 
+local_artist_percentage = SparkSubmitOperator(
+    task_id="local_artist_percentage",
+    conn_id="spark-conn",
+    application="jobs/python/gold_processing/local_artist_percentage.py",
+    application_args=[
+        "/opt/data/silver",
+        "/opt/data/gold",
+    ],
+    dag=dag
+)
+
+top_songs_with_duration = SparkSubmitOperator(
+    task_id="top_songs_with_duration",
+    conn_id="spark-conn",
+    application="jobs/python/gold_processing/top_songs_with_duration.py",
+    application_args=[
+        "/opt/data/silver",
+        "/opt/data/gold",
+    ],
+    dag=dag
+)
+
 
 end = PythonOperator(
     task_id="end",
@@ -103,5 +125,8 @@ end = PythonOperator(
 start >> health_check >> repartition >> silver_processing >> [
     count_artists_by_country, 
     count_explicit_songs_by_country,
-    avg_days_to_popularity
+    avg_days_to_popularity,
+    local_artist_percentage,
+    top_songs_with_duration
 ] >> end
+
