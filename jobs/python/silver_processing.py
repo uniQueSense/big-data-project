@@ -18,36 +18,37 @@ def process_data(input_folder, additional_folders, output_file, partition_num):
 
     df = df.drop("url", "track_id", "available_markets")
 
-    #df = df.withColumn("markets", explode(col("available_markets").cast(ArrayType(StringType()))))
-
     artists_df = df.select("artist").distinct()
-    artists_df = artists_df.withColumn("artist_array", split(col("artist"), ","))
+    artists_df = artists_df.withColumn("artist_array", split(col("artist"), ",")) \
+                           .withColumn("artist", explode(col("artist_array"))) \
+                           .withColumn("artist", trim(col("artist"))) \
+                           .drop("artist_array") \
+                           .distinct() \
+                           .withColumn("id", monotonically_increasing_id())
 
-    # Explode the array to create a new row for each artist
-    artists_df = artists_df.withColumn("artist", explode(col("artist_array")))
+    artist_song_relation_df = df.select("id", "artist").distinct()
+    artist_song_relation_df = artist_song_relation_df.withColumn("artist_array", split(col("artist"), ",")) \
+                                                     .withColumn("artist", explode(col("artist_array"))) \
+                                                     .withColumn("artist", trim(col("artist"))) \
+                                                     .drop("artist_array") \
+                                                     .distinct()
 
-    # Trim whitespace from artist names
-    artists_df = artists_df.withColumn("artist", trim(col("artist")))
-
-    # Remove duplicates
-    artists_df = artists_df.drop("artist_array").distinct()
-
-    # Add an ID column
-    artists_df = artists_df.withColumn("id", monotonically_increasing_id())
+    artist_song_relation_df = artist_song_relation_df.join(
+        artists_df.select("artist", "id").withColumnRenamed("id", "artist_id"),
+        on="artist",
+        how="inner"
+    ).select("artist_id", "id").withColumnRenamed("id", "song_id")
 
     artist_json_df = spark.read.json(additional_folders["artists"])
 
-    # Flatten aliases to allow matching
     artist_json_df = artist_json_df.withColumn("alias", explode(col("aliases.name")))
 
-    # Match artists_df with artist_json_df
     enriched_artists_df = artists_df.join(
         artist_json_df.select("name", "alias", "country"),
         (artists_df["artist"] == artist_json_df["name"]) | (artists_df["artist"] == artist_json_df["alias"]),
         "left"
     ).withColumn("country", col("country"))
 
-    # Drop temporary columns and duplicates
     enriched_artists_df = enriched_artists_df.drop("name", "alias").dropDuplicates()
 
     albums_df = df.select("album").distinct()
@@ -84,7 +85,8 @@ def process_data(input_folder, additional_folders, output_file, partition_num):
         [songs_df, "songs"],
         [song_rank_history_df, "song_rank_history"],
         [song_data_df, "song_data"],
-        [combined_df, "combined_continents_hdi"]
+        [combined_df, "combined_continents_hdi"],
+        [artist_song_relation_df, "artist_song_relation"]
     ]
 
     for config in configs:

@@ -1,7 +1,7 @@
 import sys
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, count
+from pyspark.sql.functions import col, count, count_distinct
 
 def count_artists_by_country(hdi_folder, artists_folder, output_folder):
     spark = SparkSession.builder.appName("CountArtistsByCountry").getOrCreate()
@@ -27,13 +27,11 @@ def count_artists_by_country(hdi_folder, artists_folder, output_folder):
 if __name__ == "__main__":
     input_folder = sys.argv[1]
     output_folder = sys.argv[2]
-    mode = sys.argv[3]
 
-    if mode == "popular_artists_by_country":
-        hdi_folder = f"{input_folder}/combined_continents_hdi"
-        artists_folder = f"{input_folder}/artists"
-        output_folder = f"{output_folder}/artist_counts_by_country"
+    hdi_folder = f"{input_folder}/combined_continents_hdi"
+    artists_folder = f"{input_folder}/artists"
+    output_folder = f"{output_folder}/artist_counts_by_country"
 
-        count_artists_by_country(hdi_folder, artists_folder, output_folder)
-    
+    count_artists_by_country(hdi_folder, artists_folder, output_folder)
+        
     

@@ -60,17 +60,39 @@ silver_processing = SparkSubmitOperator(
     dag=dag
 )
 
-gold_processing = SparkSubmitOperator(
-    task_id="gold_processing",
+count_artists_by_country = SparkSubmitOperator(
+    task_id="count_artists_by_country",
     conn_id="spark-conn",
-    application="jobs/python/gold_processing.py",
+    application="jobs/python/gold_processing/count_artists_by_country.py",
     application_args=[
         "/opt/data/silver",
         "/opt/data/gold",
-        "popular_artists_by_country"
     ],
     dag=dag
 )
+
+count_explicit_songs_by_country = SparkSubmitOperator(
+    task_id="count_explicit_songs",
+    conn_id="spark-conn",
+    application="jobs/python/gold_processing/count_explicit_songs.py",
+    application_args=[
+        "/opt/data/silver",
+        "/opt/data/gold",
+    ],
+    dag=dag
+)
+
+avg_days_to_popularity = SparkSubmitOperator(
+    task_id="avg_days_to_popularity",
+    conn_id="spark-conn",
+    application="jobs/python/gold_processing/avg_days_to_popularity.py",
+    application_args=[
+        "/opt/data/silver",
+        "/opt/data/gold",
+    ],
+    dag=dag
+)
+
 
 end = PythonOperator(
     task_id="end",
@@ -78,4 +100,8 @@ end = PythonOperator(
     dag=dag
 )
 
-start >> health_check >> repartition >> silver_processing >> gold_processing >> end
+start >> health_check >> repartition >> silver_processing >> [
+    count_artists_by_country, 
+    count_explicit_songs_by_country,
+    avg_days_to_popularity
+] >> end
